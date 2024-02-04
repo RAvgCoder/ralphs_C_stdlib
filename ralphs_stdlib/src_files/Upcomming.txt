@@ -1,0 +1,53 @@
+array_list
+-------------------
+Custom Sort
+Custom Comparator
+
+-----[ Functional ]
+        |--> Foreach
+
+
+LinkedList
+--------------------
+Sorting
+Custom Comparator
+
+Add Back
+Add Front
+
+Free
+Free_dangle
+
+-----[ Functional ]
+        |--> Map
+        |--> Filter
+        |--> Foreach
+
+
+Binary Tree
+-------------------
+Custom Comparators
+
+Traversals
+
+Free, Free_dangle
+
+-----[ Functional ]
+        |--> Map
+        |--> Filter
+        |--> Foreach
+
+
+
+
+
+
+Maps - Tree, Linked, Hash
+---------------------
+Custom Comparator
+
+-----[ Functional ]
+        |--> Map
+        |--> Filter
+        |--> Foreach
+
