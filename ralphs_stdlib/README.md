@@ -10,8 +10,11 @@ This README provides documentation for a custom C library containing two modules
 
 The `array_list` module provides functionalities for creating and manipulating dynamic arrays.
 
+
 - **`alist_new()`**
     - Creates a new array list.
+- **`alist_new_init_size(int initial_capacity)`**
+    - Creates a new array list with a specified initial capacity.
 - **`alist_push_back(array_list_t array_list, void* data)`**
     - Adds an element to the back of the array list.
 - **`alist_nth(array_list_t array_list, int idx)`**
@@ -24,6 +27,18 @@ The `array_list` module provides functionalities for creating and manipulating d
     - Deletes the array list and deallocates all its elements.
 - **`alist_remove_nth(array_list_t array_list, int idx)`**
     - Removes a value from a specified index in the array list and returns the value if found.
+- **`alist_remove_front(array_list_t array_list)`**
+    - Removes the first element from the array list.
+- **`alist_remove_back(array_list_t array_list)`**
+    - Removes the last element from the array list.
+- **`alist_insert_nth(array_list_t array_list, void* data, int idx)`**
+    - Inserts an element at a specified index in the array list.
+- **`alist_map(array_list_t array_list, void* (*map_function)(const void*))`**
+    - Applies a function to each element of the array list.
+- **`alist_filter(array_list_t array_list, bool (*filter_function)(const void*))`**
+    - Filters elements of the array list based on a condition.
+- **`alist_foreach(array_list_t array_list, void (*foreach_function)(void*))`**
+    - Applies a function to each element of the array list.
 
 **Module: string_tokens**
 
