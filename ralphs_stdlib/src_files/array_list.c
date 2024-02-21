@@ -26,12 +26,12 @@ static void alist_can_grow(Alist *alist);
  */
 array_list_t alist_new() {
     Alist *alist = (Alist *) malloc(sizeof(Alist));
-    assert(alist != NULL && "Failed init the arraylist enclosure");
+    assert(alist != NULL && "Failed to init the arraylist enclosure Buy more RAM!!");
 
     alist->size = 0;
     alist->max_capacity = ALIST_PADDING;
     alist->data = calloc(ALIST_PADDING, sizeof(void *));
-    assert(alist->data && "Failed to create arraylist");
+    assert(alist->data && "Failed to create arraylist Get a new computer bro!!");
 
     return alist;
 }
