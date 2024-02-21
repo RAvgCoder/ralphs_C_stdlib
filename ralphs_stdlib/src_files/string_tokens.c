@@ -73,9 +73,11 @@ char *stok_nth(string_tokens_t string_tokens, int idx) {
  * Frees the tokens created
  */
 void stok_free(string_tokens_t string_tokens) {
-    char *line = alist_nth(string_tokens, 0);
-    alist_free_dangle(((sTokens *) string_tokens)->tokens);
-    free(line);
+   if (stok_len( string_tokens ) != 0) {
+        char *line = alist_nth(((sTokens*)string_tokens)->tokens, 0);
+        alist_free_dangle(((sTokens *) string_tokens)->tokens);
+        free(line);
+    }
 }
 
 /**
