@@ -20,6 +20,8 @@ void test_stok_nth();
 
 void test_stok_to_array();
 
+void test_stok_free();
+
 int stok_test_all() {
     /* Run tests */
     printf("// ------- [ STRING TOKEN TEST ] ------- \\\\ \n");
@@ -28,6 +30,7 @@ int stok_test_all() {
     test_stok_len();
     test_stok_nth();
     test_stok_to_array();
+    test_stok_free();
 
     printf("All tests passed successfully.\n\n");
 
@@ -127,4 +130,29 @@ void test_stok_to_array() {
     free(arr);
 }
 
+void test_stok_free() {
+    printf("Testing stok_free...\n");
+    
+    const char* source = "Hello,world,how,are,you";
+
+    // Calculate the length of the string
+    size_t length = strlen(source);
+
+    // Allocate memory for the string plus one extra byte for the null terminator
+    char *destination = (char *)malloc(length + 1);
+
+    // Check if memory allocation was successful
+    if (destination == NULL) {
+        fprintf(stderr, "Memory allocation failed\n");
+        exit(1);
+    }
+
+    // Copy the string into the allocated memory
+    strcpy(destination, source);
+    char delim[] = ",";
+    string_tokens_t tokens = stok_split(destination, delim);
+
+    free(destination);
+    stok_free(tokens);
+}
 #endif //AS2_STRING_TOKENS_TEST_H
