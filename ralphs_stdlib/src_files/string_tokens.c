@@ -20,11 +20,11 @@ static void stok_add(sTokens *stok, char *token);
  * @param str: String to split
  * @param delim: What to split by
  */
-string_tokens_t stok_split(char *str, char *delimeter) {
+string_tokens_t stok_split(char *str, char *delimiter) {
     sTokens *stok = stok_init();
     // Split the string
     char *dup = strdup(str);
-    char *word = strtok(dup, delimeter);
+    char *word = strtok(dup, delimiter);
     while (word != NULL) {
         // Removes extra new line at the end of the line
         if (word[strlen(word) - 1] == '\n') {
@@ -35,7 +35,7 @@ string_tokens_t stok_split(char *str, char *delimeter) {
         stok_add(stok, word);
 
         // Read in next word
-        word = strtok(NULL, delimeter);
+        word = strtok(NULL, delimiter);
     }
     return stok;
 }

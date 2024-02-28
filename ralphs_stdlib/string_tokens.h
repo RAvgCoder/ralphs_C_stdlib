@@ -12,7 +12,7 @@ typedef void* string_tokens_t;
  * @param str: String to split
  * @param delim: What to split by
  */
-extern string_tokens_t stok_split(char* str, char* delimeter);
+extern string_tokens_t stok_split(char* str, char* delimiter);
 
 /**
  *  Gets how many words it was able to split into
