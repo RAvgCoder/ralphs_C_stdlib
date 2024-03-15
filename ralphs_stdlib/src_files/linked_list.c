@@ -23,7 +23,7 @@ linked_list_t new_node(void *data)
 /**
  * Creates a new linked list
  */
-extern linked_list_t l_list_new()
+linked_list_t l_list_new()
 {
     Llist *l_list = (Llist *) calloc(1, sizeof(Llist));
     assert(l_list != NULL && "Failed to init the linked_list enclosure");
@@ -35,7 +35,7 @@ extern linked_list_t l_list_new()
 /**
  * Returns the size of the linked list
  */
-extern int l_list_size(linked_list_t linked_list)
+int l_list_size(linked_list_t linked_list)
 {
     STDLIB_ASSERT(linked_list, "link_list given is NULL")
 
@@ -45,7 +45,7 @@ extern int l_list_size(linked_list_t linked_list)
 /**
  * Adds an element to the back of a linked list
  */
-extern void l_list_push_back(linked_list_t linked_list, void *data)
+void l_list_push_back(linked_list_t linked_list, void *data)
 {
     STDLIB_ASSERT(linked_list, "link_list given is NULL")
 
@@ -67,7 +67,7 @@ extern void l_list_push_back(linked_list_t linked_list, void *data)
 /**
  * Adds an element to the front of a linked list
  */
-extern void l_list_add_front(linked_list_t linked_list, void *data)
+void l_list_add_front(linked_list_t linked_list, void *data)
 {
     STDLIB_ASSERT(linked_list, "link_list given is NULL")
 
@@ -90,7 +90,7 @@ extern void l_list_add_front(linked_list_t linked_list, void *data)
  * Remove an item from the front of a linked list
  * @return The item removed from the front of the list and returns null if the list is empty
  */
-extern void *l_list_remove_front(linked_list_t linked_list)
+void *l_list_remove_front(linked_list_t linked_list)
 {
     STDLIB_ASSERT(linked_list, "link_list given is NULL")
 
@@ -119,7 +119,7 @@ extern void *l_list_remove_front(linked_list_t linked_list)
  * Remove an item from the back of a linked list
  * @return The item removed from the back of the list and returns null if the list is empty
  */
-extern void *l_list_remove_back(linked_list_t linked_list)
+void *l_list_remove_back(linked_list_t linked_list)
 {
     STDLIB_ASSERT(linked_list, "link_list given is NULL")
 
@@ -143,7 +143,7 @@ extern void *l_list_remove_back(linked_list_t linked_list)
     return item;
 }
 
-extern void l_list_foreach(linked_list_t linked_list, void (*foreach_function)(void *))
+void l_list_foreach(linked_list_t linked_list, void (*foreach_function)(void *))
 {
     STDLIB_ASSERT(linked_list, "link_list given is NULL")
 
@@ -156,7 +156,7 @@ extern void l_list_foreach(linked_list_t linked_list, void (*foreach_function)(v
 /**
  * @return Returns the first elem in the list and NULL if empty
  */
-extern void *l_list_peek_front(linked_list_t linked_list)
+void *l_list_peek_front(linked_list_t linked_list)
 {
     STDLIB_ASSERT(linked_list, "link_list given is NULL")
 
@@ -169,7 +169,7 @@ extern void *l_list_peek_front(linked_list_t linked_list)
 /**
  * @return Returns the last elem in the list and NULL if empty
  */
-extern void *l_list_peek_back(linked_list_t linked_list)
+void *l_list_peek_back(linked_list_t linked_list)
 {
     STDLIB_ASSERT(linked_list, "link_list given is NULL")
 
@@ -184,7 +184,7 @@ extern void *l_list_peek_back(linked_list_t linked_list)
  * @param item The item to remove from the list
  * @return Return true if the item is found and false is not
  */
-extern bool l_list_remove(linked_list_t linked_list, void *item)
+bool l_list_remove(linked_list_t linked_list, void *item)
 {
     STDLIB_ASSERT(linked_list, "link_list given is NULL")
 
@@ -223,7 +223,7 @@ extern bool l_list_remove(linked_list_t linked_list, void *item)
  * Sorts the elements in the list with a comparator
  * @param comparator Passes in the ith and ith + 1 value so that if you want them swapped you return true
  */
-extern void l_list_sort(linked_list_t linked_list, bool (*comparator)(void *, void *))
+void l_list_sort(linked_list_t linked_list, bool (*comparator)(void *, void *))
 {
     STDLIB_ASSERT(linked_list, "link_list given is NULL")
 
@@ -265,7 +265,7 @@ extern void l_list_sort(linked_list_t linked_list, bool (*comparator)(void *, vo
 /**
  * Converts a linked list to an array list
  */
-extern array_list_t l_list_to_alist(linked_list_t linked_list)
+array_list_t l_list_to_alist(linked_list_t linked_list)
 {
     STDLIB_ASSERT(linked_list, "link_list given is NULL")
 
@@ -280,7 +280,7 @@ extern array_list_t l_list_to_alist(linked_list_t linked_list)
 /**
  * Shallow copy the linked list to a new linked list
  */
-extern linked_list_t l_list_copy(linked_list_t linked_list)
+linked_list_t l_list_copy(linked_list_t linked_list)
 {
     linked_list_t copied_list = l_list_new();
 
@@ -295,7 +295,7 @@ extern linked_list_t l_list_copy(linked_list_t linked_list)
 /**
  * Free linked list and all elements stored in the list
  */
-extern void l_list_free(linked_list_t linked_list)
+void l_list_free(linked_list_t linked_list)
 {
     if (linked_list == NULL) return;
 
@@ -308,7 +308,7 @@ extern void l_list_free(linked_list_t linked_list)
     free(linked_list);
 }
 
-extern void l_list_free_dangle(linked_list_t linked_list)
+void l_list_free_dangle(linked_list_t linked_list)
 {
     if (linked_list == NULL) return;
 

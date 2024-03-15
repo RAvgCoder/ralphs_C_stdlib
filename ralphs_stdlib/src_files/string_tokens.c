@@ -22,7 +22,11 @@ static void stok_add(sTokens *stok, char *token);
  */
 string_tokens_t stok_split(char *str, char *delimiter)
 {
+    STDLIB_ASSERT(str, "String to split is NULL")
+    STDLIB_ASSERT(delimiter, "Delimiter to split by is NULL")
+
     sTokens *stok = stok_init();
+
     // Split the string
     char *dup = strdup(str);
     char *word = strtok(dup, delimiter);
@@ -49,6 +53,8 @@ string_tokens_t stok_split(char *str, char *delimiter)
  */
 char **stok_to_array(string_tokens_t string_tokens)
 {
+    STDLIB_ASSERT(string_tokens, "string_tokens given is NULL")
+
     int len = stok_len(string_tokens);
     // +1 is done so that the end of  the string is array is null
     char **arr = calloc(len + 1, sizeof(char *));
@@ -65,6 +71,8 @@ char **stok_to_array(string_tokens_t string_tokens)
  */
 int stok_len(string_tokens_t string_tokens)
 {
+    STDLIB_ASSERT(string_tokens, "string_tokens given is NULL")
+
     return alist_size(((sTokens *) string_tokens)->tokens);
 }
 
@@ -73,6 +81,8 @@ int stok_len(string_tokens_t string_tokens)
  */
 char *stok_nth(string_tokens_t string_tokens, int idx)
 {
+    STDLIB_ASSERT(string_tokens, "string_tokens given is NULL")
+
     return (char *) alist_nth(((sTokens *) string_tokens)->tokens, idx);
 }
 
@@ -81,6 +91,8 @@ char *stok_nth(string_tokens_t string_tokens, int idx)
  */
 void stok_free(string_tokens_t string_tokens)
 {
+    STDLIB_ASSERT(string_tokens, "string_tokens given is NULL")
+    
     if (stok_len(string_tokens) != 0)
     {
         char *line = alist_nth(((sTokens *) string_tokens)->tokens, 0);

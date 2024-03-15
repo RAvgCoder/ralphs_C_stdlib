@@ -66,6 +66,7 @@ array_list_t alist_new_init_size(int size)
  */
 void alist_free_dangle(array_list_t array_list)
 {
+    if(array_list == NULL) return;
     Alist *alist = array_list;
     free(alist->data);
 }
@@ -92,6 +93,8 @@ void alist_free(array_list_t array_list)
  */
 int alist_size(array_list_t array_list)
 {
+    STDLIB_ASSERT(array_list, "array_list given is NULL")
+
     return ((Alist *) array_list)->size;
 }
 
@@ -103,6 +106,8 @@ int alist_size(array_list_t array_list)
  */
 void alist_push_back(array_list_t array_list, void *data)
 {
+    STDLIB_ASSERT(array_list, "array_list given is NULL")
+
     Alist *alist = array_list;
     alist_can_grow(alist);
     alist->data[alist->size] = data;
@@ -116,6 +121,8 @@ void alist_push_back(array_list_t array_list, void *data)
  */
 void *alist_nth(array_list_t array_list, int idx)
 {
+    STDLIB_ASSERT(array_list, "array_list given is NULL")
+
     Alist *alist = array_list;
     if (!(idx >= 0 && idx < (int) alist->size)) return NULL;
     return alist->data[idx];
@@ -127,6 +134,8 @@ void *alist_nth(array_list_t array_list, int idx)
  */
 void *alist_remove_nth(array_list_t array_list, int idx)
 {
+    STDLIB_ASSERT(array_list, "array_list given is NULL")
+
     void *value = alist_nth(array_list, idx);
     if (value == NULL) return NULL;
 
@@ -146,6 +155,8 @@ void *alist_remove_nth(array_list_t array_list, int idx)
  */
 void *alist_remove_front(array_list_t array_list)
 {
+    STDLIB_ASSERT(array_list, "array_list given is NULL")
+
     return alist_remove_nth(array_list, 0);
 }
 
@@ -162,6 +173,8 @@ void *alist_remove_front(array_list_t array_list)
  */
 bool alist_insert_nth(array_list_t array_list, void *data, int idx)
 {
+    STDLIB_ASSERT(array_list, "array_list given is NULL")
+
     Alist *alist = array_list;
 
     // Check if the index is within bounds
@@ -193,6 +206,8 @@ bool alist_insert_nth(array_list_t array_list, void *data, int idx)
  */
 bool alist_insert_front(array_list_t array_list, void *data)
 {
+    STDLIB_ASSERT(array_list, "array_list given is NULL")
+
     return alist_insert_nth(array_list, data, 0);
 }
 
@@ -203,6 +218,8 @@ bool alist_insert_front(array_list_t array_list, void *data)
  */
 void *alist_remove_back(array_list_t array_list)
 {
+    STDLIB_ASSERT(array_list, "array_list given is NULL")
+
     return alist_remove_nth(array_list, alist_size(array_list) - 1);
 }
 
@@ -215,6 +232,8 @@ void *alist_remove_back(array_list_t array_list)
  */
 array_list_t alist_map(array_list_t array_list, void *(*map_function)(const void *))
 {
+    STDLIB_ASSERT(array_list, "array_list given is NULL")
+
     Alist *alist = array_list;
     array_list_t mapped_list = alist_new_init_size(alist->size);
     // Add all mapped elements to the new list
@@ -235,6 +254,8 @@ array_list_t alist_map(array_list_t array_list, void *(*map_function)(const void
  */
 array_list_t alist_filter(array_list_t array_list, bool (*filter_function)(const void *))
 {
+    STDLIB_ASSERT(array_list, "array_list given is NULL")
+
     Alist *alist = array_list;
     array_list_t mapped_list = alist_new_init_size(alist->size);
     // Add all mapped elements to the new list
@@ -255,6 +276,8 @@ array_list_t alist_filter(array_list_t array_list, bool (*filter_function)(const
  */
 void alist_foreach(array_list_t array_list, void (*foreach_function)(void *))
 {
+    STDLIB_ASSERT(array_list, "array_list given is NULL")
+
     Alist *alist = array_list;
     for (int i = 0; i < alist->size; ++i)
     {
@@ -268,8 +291,10 @@ void alist_foreach(array_list_t array_list, void (*foreach_function)(void *))
  * @param array_list The list to make a copy of
  * @return The shallow copied list
  */
-extern array_list_t alist_copy(array_list_t array_list)
+array_list_t alist_copy(array_list_t array_list)
 {
+    STDLIB_ASSERT(array_list, "array_list given is NULL")
+
     Alist *original_list = array_list;
     Alist *copied_list = alist_new_init_size(original_list->size);
     STDLIB_ASSERT(copied_list, "Failed to create copy list");
@@ -281,8 +306,10 @@ extern array_list_t alist_copy(array_list_t array_list)
     return copied_list;
 }
 
-extern void alist_set(array_list_t array_list, int index, void *item)
+void alist_set(array_list_t array_list, int index, void *item)
 {
+    STDLIB_ASSERT(array_list, "array_list given is NULL")
+
     Alist *alist = array_list;
     STDLIB_ASSERT(index < alist->size, "Attempting to insert at index %d to array of max index %d", index,
                   alist->size - 1)
@@ -292,16 +319,20 @@ extern void alist_set(array_list_t array_list, int index, void *item)
 /**
  * @return Retrieve the first element in the array and null if empty
  */
-extern void *alist_peek_front(array_list_t array_list)
+void *alist_peek_front(array_list_t array_list)
 {
+    STDLIB_ASSERT(array_list, "array_list given is NULL")
+
     return alist_nth(array_list, 0);
 }
 
 /**
  * @return Retrieve the last element in the array and null if empty
  */
-extern void *alist_peek_back(array_list_t array_list)
+void *alist_peek_back(array_list_t array_list)
 {
+    STDLIB_ASSERT(array_list, "array_list given is NULL")
+
     return alist_nth(array_list, alist_size(array_list) - 1);
 }
 
@@ -309,8 +340,10 @@ extern void *alist_peek_back(array_list_t array_list)
  * Sorts the elements in the list with a comparator
  * @param comparator Passes in the ith and ith + 1 value so that if you want them swapped you return true
  */
-extern void alist_sort(array_list_t array_list, bool (*comparator)(void *, void *))
+void alist_sort(array_list_t array_list, bool (*comparator)(void *, void *))
 {
+    STDLIB_ASSERT(array_list, "array_list given is NULL")
+
     int array_size = alist_size(array_list);
     if (array_size <= 1) return;
     alist_sort_bounds(array_list, comparator, 0, array_size - 1);
@@ -320,9 +353,11 @@ extern void alist_sort(array_list_t array_list, bool (*comparator)(void *, void 
  * Sorts the elements in the list within the bounds of the index provided with a comparator
  * @param comparator Passes in the ith and ith + 1 value so that if you want them swapped you return true
  */
-extern void
+void
 alist_sort_bounds(array_list_t array_list, bool (*comparator)(void *, void *), int start_index, int end_index)
 {
+    STDLIB_ASSERT(array_list, "array_list given is NULL")
+
     Alist *alist = array_list;
 
     STDLIB_ASSERT(end_index >= start_index, "End index is less than start index");
@@ -353,10 +388,12 @@ alist_sort_bounds(array_list_t array_list, bool (*comparator)(void *, void *), i
 /**
  * Converts an array list to a linked list
  */
-extern linked_list_t alist_to_l_list(array_list_t arrayList)
+linked_list_t alist_to_l_list(array_list_t array_list)
 {
+    STDLIB_ASSERT(array_list, "array_list given is NULL")
+
     linked_list_t linkedList = l_list_new();
-    ALIST_FOREACH_LOOP(arrayList)
+    ALIST_FOREACH_LOOP(array_list)
     {
         l_list_push_back(linkedList, elem__);
     }
@@ -366,8 +403,10 @@ extern linked_list_t alist_to_l_list(array_list_t arrayList)
 /**
  * For each element and index it passes it into a foreach function you provide
  */
-extern void alist_foreach_index(array_list_t array_list, void (*foreach_function)(int, void *))
+void alist_foreach_index(array_list_t array_list, void (*foreach_function)(int, void *))
 {
+    STDLIB_ASSERT(array_list, "array_list given is NULL")
+
     Alist *alist = array_list;
     for (int i = 0; i < alist->size; ++i)
     {

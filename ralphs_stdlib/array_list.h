@@ -158,7 +158,7 @@ alist_sort_bounds(array_list_t array_list, bool (*comparator)(void *, void *), i
 /**
  * Converts an array list to a linked list
  */
-extern linked_list_t alist_to_l_list(array_list_t arrayList);
+extern linked_list_t alist_to_l_list(array_list_t array_list);
 
 /**
  * For each element and index it passes it into a foreach function you provide
