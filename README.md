@@ -1,10 +1,10 @@
 # C Standard Library README
 
-This repository contains a custom C standard library developed to provide various data structures and utility functions commonly used in C programming. Below are the details of the available modules and the functions they provide.
+This repository contains a custom C standard library developed to provide various item structures and utility functions commonly used in C programming. Below are the details of the available modules and the functions they provide.
 
 ## `array_list.h`
 
-This module provides an implementation of a dynamic array list data structure.
+This module provides an implementation of a dynamic array list item structure.
 
 ### Functions
 

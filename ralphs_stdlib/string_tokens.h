@@ -17,7 +17,7 @@ extern string_tokens_t stok_split(char* str, char* delimiter);
 /**
  *  Gets how many words it was able to split into
  */
-extern unsigned int stok_len(string_tokens_t string_tokens);
+extern int stok_len(string_tokens_t string_tokens);
 
 /**
  * Frees the tokens created

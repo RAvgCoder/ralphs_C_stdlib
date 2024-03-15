@@ -15,7 +15,7 @@ The `array_list` module provides functionalities for creating and manipulating d
     - Creates a new array list.
 - **`alist_new_init_size(int initial_capacity)`**
     - Creates a new array list with a specified initial capacity.
-- **`alist_push_back(array_list_t array_list, void* data)`**
+- **`alist_push_back(array_list_t array_list, void* item)`**
     - Adds an element to the back of the array list.
 - **`alist_nth(array_list_t array_list, int idx)`**
     - Retrieves the nth element from the array list.
@@ -31,7 +31,7 @@ The `array_list` module provides functionalities for creating and manipulating d
     - Removes the first element from the array list.
 - **`alist_remove_back(array_list_t array_list)`**
     - Removes the last element from the array list.
-- **`alist_insert_nth(array_list_t array_list, void* data, int idx)`**
+- **`alist_insert_nth(array_list_t array_list, void* item, int idx)`**
     - Inserts an element at a specified index in the array list.
 - **`alist_map(array_list_t array_list, void* (*map_function)(const void*))`**
     - Applies a function to each element of the array list.
