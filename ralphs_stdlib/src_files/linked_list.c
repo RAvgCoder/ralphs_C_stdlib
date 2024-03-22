@@ -299,12 +299,16 @@ void l_list_free(linked_list_t linked_list)
 {
     if (linked_list == NULL) return;
 
-    L_LIST_FOREACH_LOOP(linked_list)
+    Llist *llist = linked_list;
+    for (Ll_node *node = llist->head; node != NULL;)
     {
-        free(elem__);
-        free(node__);
+        free(node->item);
+        Ll_node *prev = node;
+        node = node->next;
+        free(prev);
     }
-    ((Llist *) linked_list)->size = 0;
+
+    llist->size = 0;
     free(linked_list);
 }
 
@@ -312,9 +316,12 @@ void l_list_free_dangle(linked_list_t linked_list)
 {
     if (linked_list == NULL) return;
 
-    L_LIST_FOREACH_LOOP(linked_list)
+    Llist *llist__ = linked_list;
+    for (Ll_node *node__ = llist__->head; node__ != NULL;)
     {
-        free(node__);
+        Ll_node *prev = node__;
+        node__ = node__->next;
+        free(prev);
     }
 
     ((Llist *) linked_list)->size = 0;
