@@ -92,7 +92,7 @@ char *stok_nth(string_tokens_t string_tokens, int idx)
 void stok_free(string_tokens_t string_tokens)
 {
     STDLIB_ASSERT(string_tokens, "string_tokens given is NULL")
-    
+
     if (stok_len(string_tokens) != 0)
     {
         char *line = alist_nth(((sTokens *) string_tokens)->tokens, 0);
