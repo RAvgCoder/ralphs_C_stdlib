@@ -24,7 +24,7 @@ void test_l_list_push_back()
     l_list_push_back(list, &data2);
     l_list_push_back(list, &data3);
 
-    STDLIB_ASSERT(l_list_size(list) == 3, "Size of the list after push back is not 3");
+    STDLIB_ASSERT(l_list_size(list) == 3, "Size of the list after push back is not 3")
 
 
     // Clean up
@@ -44,7 +44,7 @@ void test_l_list_add_front()
     l_list_add_front(list, &data2);
     l_list_add_front(list, &data3);
 
-    STDLIB_ASSERT(l_list_size(list) == 3, "Size of the list after add front is not 3");
+    STDLIB_ASSERT(l_list_size(list) == 3, "Size of the list after add front is not 3")
 
 
     // Clean up
@@ -64,13 +64,13 @@ void test_l_list_remove_back()
     l_list_push_back(list, &data2);
     l_list_push_back(list, &data3);
 
-    STDLIB_ASSERT(*(int *) l_list_remove_back(list) == data3, "Removed item from back is incorrect");
+    STDLIB_ASSERT(*(int *) l_list_remove_back(list) == data3, "Removed item from back is incorrect")
 
     l_list_remove_back(list);
     l_list_remove_back(list);
     l_list_remove_back(list);
 
-    STDLIB_ASSERT(l_list_size(list) == 0, "List is not empty after removing all elements from the back of the list");
+    STDLIB_ASSERT(l_list_size(list) == 0, "List is not empty after removing all elements from the back of the list")
 
     free(list);
 }
@@ -88,7 +88,7 @@ void test_l_list_remove_front()
     l_list_push_back(list, &data2);
     l_list_push_back(list, &data3);
 
-    STDLIB_ASSERT(*(int *) l_list_remove_front(list) == data1, "Removed item from front is incorrect");
+    STDLIB_ASSERT(*(int *) l_list_remove_front(list) == data1, "Removed item from front is incorrect")
 
     l_list_remove_front(list);
     l_list_remove_front(list);
@@ -110,14 +110,14 @@ void test_l_list_size()
     l_list_push_back(list, &data1);
     l_list_push_back(list, &data1);
 
-    STDLIB_ASSERT(l_list_size(list) == 3, "Size of the list is incorrect");
+    STDLIB_ASSERT(l_list_size(list) == 3, "Size of the list is incorrect")
 
     l_list_remove_back(list);
     l_list_remove_back(list);
     l_list_remove_back(list);
     l_list_remove_back(list);
 
-    STDLIB_ASSERT(l_list_size(list) == 0, "Size of the list is incorrect");
+    STDLIB_ASSERT(l_list_size(list) == 0, "Size of the list is incorrect")
 
     free(list);
 }
