@@ -166,8 +166,7 @@ extern linked_list_t alist_to_l_list(array_list_t array_list);
 extern void alist_foreach_index(array_list_t array_list, void (*foreach_function)(int, void *));
 
 // An easier for each loop providing the curr elem__ and loop_index__ for each iteration
-#define ALIST_FOREACH_LOOP(array_list__) \
-    void *elem__;\
+#define ALIST_FOREACH_ELEM(array_list__, elem__) \
     for (int loop_index__ = 0; \
          loop_index__ < alist_size(array_list__) && \
          (elem__ = alist_nth(array_list__, loop_index__), 1); \

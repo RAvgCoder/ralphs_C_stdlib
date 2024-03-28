@@ -88,14 +88,23 @@ extern void l_list_free(linked_list_t linked_list);
  */
 extern void l_list_free_dangle(linked_list_t linked_list);
 
-#define L_LIST_FOREACH_LOOP(linked_list__) \
-    Llist *llist__ = linked_list__; \
-    void *elem__;                          \
-    int loop_index__ = 0; \
-    for (Ll_node *node__ = llist__->head; \
+#define L_LIST_FOREACH_NODE(linked_list__) \
+    for (Ll_node *node__ = ((Llist*)linked_list__)->head; \
+        node__ != NULL; \
+        node__ = node__->next)  \
+
+#define L_LIST_FOREACH_ELEM(linked_list__, elem__) \
+    for (Ll_node *node__ = ((Llist*)linked_list__)->head; \
         node__ != NULL  &&        \
         (elem__ = node__->item);           \
-        node__ = node__->next, ++loop_index__) \
+        node__ = node__->next)
+
+#define L_LIST_FOREACH_INDEX(linked_list__, elem__, loop_index__) \
+    loop_index__ = 0;                                          \
+    for (Ll_node *node__ = ((Llist*)linked_list__)->head; \
+        node__ != NULL  &&        \
+        (elem__ = node__->item);           \
+        node__ = node__->next, ++loop_index__)
 
 
 #endif //DEV_LINKED_LIST_H

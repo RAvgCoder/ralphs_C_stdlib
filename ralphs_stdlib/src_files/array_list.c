@@ -27,12 +27,12 @@ static void alist_can_grow(Alist *alist);
 array_list_t alist_new()
 {
     Alist *alist = (Alist *) malloc(sizeof(Alist));
-    STDLIB_ASSERT(alist != NULL, "Failed to init the arraylist enclosure Buy more RAM!!");
+    STDLIB_ASSERT(alist != NULL, "Failed to init the arraylist enclosure Buy more RAM!!")
 
     alist->size = 0;
     alist->max_capacity = ALIST_PADDING;
     alist->data = calloc(ALIST_PADDING, sizeof(void *));
-    STDLIB_ASSERT(alist->data, "Failed to create arraylist Get a new computer bro!!");
+    STDLIB_ASSERT(alist->data, "Failed to create arraylist Get a new computer bro!!")
 
     return alist;
 }
@@ -44,7 +44,7 @@ array_list_t alist_new()
 array_list_t alist_new_init_size(int size)
 {
     Alist *alist = (Alist *) malloc(sizeof(Alist));
-    STDLIB_ASSERT(alist != NULL && size >= 0, "Failed init the arraylist enclosure");
+    STDLIB_ASSERT(alist != NULL && size >= 0, "Failed init the arraylist enclosure")
 
     // Makes the size always aligned with the ALIST_PADDING size
     int padded_size = PADDING_SIZE(size, ALIST_PADDING);
@@ -52,7 +52,7 @@ array_list_t alist_new_init_size(int size)
     alist->size = 0;
     alist->max_capacity = padded_size;
     alist->data = calloc(padded_size, sizeof(void *));
-    STDLIB_ASSERT(alist->data, "Failed to create arraylist");
+    STDLIB_ASSERT(alist->data, "Failed to create arraylist")
 
     return alist;
 }
@@ -66,7 +66,7 @@ array_list_t alist_new_init_size(int size)
  */
 void alist_free_dangle(array_list_t array_list)
 {
-    if(array_list == NULL) return;
+    if (array_list == NULL) return;
     Alist *alist = array_list;
     free(alist->data);
 }
@@ -297,7 +297,7 @@ array_list_t alist_copy(array_list_t array_list)
 
     Alist *original_list = array_list;
     Alist *copied_list = alist_new_init_size(original_list->size);
-    STDLIB_ASSERT(copied_list, "Failed to create copy list");
+    STDLIB_ASSERT(copied_list, "Failed to create copy list")
 
     copied_list->size = original_list->size;
     copied_list->max_capacity = original_list->max_capacity;
@@ -360,10 +360,10 @@ alist_sort_bounds(array_list_t array_list, bool (*comparator)(void *, void *), i
 
     Alist *alist = array_list;
 
-    STDLIB_ASSERT(end_index >= start_index, "End index is less than start index");
+    STDLIB_ASSERT(end_index >= start_index, "End index is less than start index")
     STDLIB_ASSERT(start_index >= 0 && start_index <= alist->size - 1,
-                  "Cannot sort as the start index is out of bounds");
-    STDLIB_ASSERT(end_index >= 0 && end_index <= alist->size - 1, "Cannot sort as the end index is out of bounds");
+                  "Cannot sort as the start index is out of bounds")
+    STDLIB_ASSERT(end_index >= 0 && end_index <= alist->size - 1, "Cannot sort as the end index is out of bounds")
 
     bool swapped = false;
     for (int i = start_index; i < end_index; ++i)
@@ -393,9 +393,11 @@ linked_list_t alist_to_l_list(array_list_t array_list)
     STDLIB_ASSERT(array_list, "array_list given is NULL")
 
     linked_list_t linkedList = l_list_new();
-    ALIST_FOREACH_LOOP(array_list)
+
+    void *elem;
+    ALIST_FOREACH_ELEM(array_list, elem)
     {
-        l_list_push_back(linkedList, elem__);
+        l_list_push_back(linkedList, elem);
     }
     return linkedList;
 }
@@ -438,7 +440,7 @@ static void alist_can_grow(Alist *alist)
         // Make a new list
         int new_size = PADDING_SIZE(alist->max_capacity, ALIST_PADDING);
         void **new_list = calloc(new_size, sizeof(void *));
-        STDLIB_ASSERT(new_list, "Could not grow the list");
+        STDLIB_ASSERT(new_list, "Could not grow the list")
 
         // Move over the elements in the list
         alist_copy_elements(alist->data, new_list, alist->size);

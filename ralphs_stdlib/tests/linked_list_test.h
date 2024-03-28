@@ -7,7 +7,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <assert.h>
 #include "../linked_list.h"
 #include "../utils.h"
 
@@ -177,9 +176,11 @@ void test_l_list_sort()
     l_list_sort(list, ascending_int_sort);
 
     int i = -1;
-    L_LIST_FOREACH_LOOP(list)
+
+    void *elem;
+    L_LIST_FOREACH_ELEM(list, elem)
     {
-        int i1 = *(int *) elem__;
+        int i1 = *(int *) elem;
         STDLIB_ASSERT(i < i1, "List is not in ascending order ith=%d, (ith + 1)=%d", i, i1)
         i = i1;
     }
@@ -222,12 +223,14 @@ void test_l_list_to_alist()
 
     STDLIB_ASSERT(l_list_size(linkedList) == alist_size(arrayList), "Size of copied list doesnt match the original")
 
-    L_LIST_FOREACH_LOOP(linkedList)
+    void *elem;
+    int loop_index;
+    L_LIST_FOREACH_INDEX(linkedList, elem, loop_index)
     {
-        char *val = alist_nth(arrayList, loop_index__);
-        STDLIB_ASSERT(elem__ == val,
+        char *val = alist_nth(arrayList, loop_index);
+        STDLIB_ASSERT(elem == val,
                       "Conversion of a linked list to array_list failed at index:%d Expected:%s, Received:%s",
-                      loop_index__, val, (char *) elem__)
+                      loop_index, val, (char *) elem)
     }
 }
 

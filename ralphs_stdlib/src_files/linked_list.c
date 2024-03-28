@@ -147,7 +147,7 @@ void l_list_foreach(linked_list_t linked_list, void (*foreach_function)(void *))
 {
     STDLIB_ASSERT(linked_list, "link_list given is NULL")
 
-    L_LIST_FOREACH_LOOP(linked_list)
+    L_LIST_FOREACH_NODE(linked_list)
     {
         foreach_function(node__->item);
     }
@@ -201,9 +201,10 @@ bool l_list_remove(linked_list_t linked_list, void *item)
         return true;
     }
 
-    L_LIST_FOREACH_LOOP(linked_list)
+    void *elem;
+    L_LIST_FOREACH_ELEM(linked_list, elem)
     {
-        if (elem__ == item)
+        if (elem == item)
         {
             Ll_node *prev = node__->prev;
             Ll_node *next = node__->next;
@@ -270,9 +271,11 @@ array_list_t l_list_to_alist(linked_list_t linked_list)
     STDLIB_ASSERT(linked_list, "link_list given is NULL")
 
     array_list_t arrayList = alist_new();
-    L_LIST_FOREACH_LOOP(linked_list)
+
+    void *elem;
+    L_LIST_FOREACH_ELEM(linked_list, elem)
     {
-        alist_push_back(arrayList, elem__);
+        alist_push_back(arrayList, elem);
     }
     return arrayList;
 }
@@ -284,9 +287,10 @@ linked_list_t l_list_copy(linked_list_t linked_list)
 {
     linked_list_t copied_list = l_list_new();
 
-    L_LIST_FOREACH_LOOP(linked_list)
+    void *elem;
+    L_LIST_FOREACH_ELEM(linked_list, elem)
     {
-        l_list_push_back(copied_list, elem__);
+        l_list_push_back(copied_list, elem);
     }
 
     return copied_list;

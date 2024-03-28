@@ -7,7 +7,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <assert.h>
 #include "../array_list.h"
 #include "../utils.h"
 
@@ -218,7 +217,7 @@ void test_alist_map()
     for (int i = 0; i < MAX_ITER; i++)
     {
         int *x = malloc(sizeof(int));
-        assert(x && "Could not create item for mapping");
+        STDLIB_ASSERT(x, "Could not create item for mapping")
         *x = i;
         alist_push_back(list, x);
     }
@@ -238,7 +237,7 @@ void test_alist_map()
 void *map_x10_helper(const void *int_data)
 {
     int *mapped = malloc(sizeof(int));
-    assert(mapped && "Could not create item for re-mapping");
+    STDLIB_ASSERT(mapped, "Could not create item for re-mapping")
     *mapped = *((int *) int_data) * 10;
     return mapped;
 }
@@ -252,7 +251,8 @@ void test_alist_filter()
     for (int i = 0; i < MAX_ITER; i++)
     {
         int *x = malloc(sizeof(int));
-        assert(x && "Could not create item for mapping");
+        STDLIB_ASSERT(x, "Could not create item for mapping")
+
         *x = i;
         alist_push_back(list, x);
     }
@@ -290,7 +290,7 @@ void test_alist_foreach()
     for (int i = 0; i < MAX_ITER; i++)
     {
         int *x = malloc(sizeof(int));
-        assert(x && "Could not create item for mapping");
+        STDLIB_ASSERT(x, "Could not create item for mapping")
         *x = i;
         alist_push_back(list, x);
     }
@@ -302,7 +302,7 @@ void test_alist_foreach()
         int n = *(int *) alist_nth(list, i);
         int x = i;
         foreach_x10_helper(&x);
-        STDLIB_ASSERT(n == x, "Foreach function Expects output %d, but got %d", x, n);
+        STDLIB_ASSERT(n == x, "Foreach function Expects output %d, but got %d", x, n)
     }
 
     alist_free(list);
@@ -330,11 +330,12 @@ void test_alist_copy()
                   "Copied original size does not match the original original.\nCopied size is %d",
                   alist_size(copied_list))
 
-    ALIST_FOREACH_LOOP(copied_list)
+    void *elem;
+    ALIST_FOREACH_ELEM(copied_list, elem)
     {
         char *val = (char *) alist_nth(original, loop_index__);
-        STDLIB_ASSERT(elem__ == val, "Words dont match for index %d, Copied: %s, Original: %s", loop_index__,
-                      (char *) elem__, val);
+        STDLIB_ASSERT(elem == val, "Words dont match for index %d, Copied: %s, Original: %s", loop_index__,
+                      (char *) elem, val)
     }
 
     alist_free_dangle(original);
@@ -358,11 +359,12 @@ void test_alist_set()
     alist_set(list, 2, arr[1]);
     alist_set(list, 3, arr[0]);
 
-    ALIST_FOREACH_LOOP(list)
+    void *elem;
+    ALIST_FOREACH_ELEM(list, elem)
     {
         char *val = arr[3 - loop_index__];
-        STDLIB_ASSERT(elem__ == val, "Element was not set at index %d for Set:%s, Original:%s", loop_index__,
-                      (char *) elem__, val)
+        STDLIB_ASSERT(elem == val, "Element was not set at index %d for Set:%s, Original:%s", loop_index__,
+                      (char *) elem, val)
     }
 }
 
@@ -434,10 +436,11 @@ void test_alist_sort()
 
     alist_sort(list, ascending_int_sort);
 
-    ALIST_FOREACH_LOOP(list)
+    void *elem;
+    ALIST_FOREACH_ELEM(list, elem)
     {
         if (loop_index__ == 3) break;
-        int i = *(int *) elem__;
+        int i = *(int *) elem;
         int i1 = *(int *) alist_nth(list, loop_index__ + 1);
         STDLIB_ASSERT(i < i1, "List is not in ascending order ith=%d, (ith + 1)=%d", i, i1)
     }
@@ -482,11 +485,13 @@ void test_alist_to_l_list()
 
     linked_list_t linkedList = alist_to_l_list(arrayList);
 
-    L_LIST_FOREACH_LOOP(linkedList)
+    void *elem;
+    int loop_index;
+    L_LIST_FOREACH_INDEX(linkedList, elem, loop_index)
     {
-        char *val = alist_nth(arrayList, loop_index__);
-        STDLIB_ASSERT(val == elem__, "Copied list doesnt match at index: %d, Expected:%s Found:%s", loop_index__, val,
-                      (char *) elem__);
+        char *val = alist_nth(arrayList, loop_index);
+        STDLIB_ASSERT(val == elem, "Copied list doesnt match at index: %d, Expected:%s Found:%s", loop_index, val,
+                      (char *) elem)
     }
 }
 
@@ -508,10 +513,11 @@ void test_alist_foreach_index()
 
     alist_foreach_index(arrayList, foreach_times_index_helper);
 
-    ALIST_FOREACH_LOOP(arrayList)
+    void *elem;
+    ALIST_FOREACH_ELEM(arrayList, elem)
     {
-        int expected = *((int *) elem__) *= loop_index__;
-        int actual = *((int *) elem__);
+        int expected = *((int *) elem) *= loop_index__;
+        int actual = *((int *) elem);
         STDLIB_ASSERT(actual == expected, "For each index function failed at index:%d Expected:%d, Received:%d",
                       loop_index__, expected, actual)
     }
