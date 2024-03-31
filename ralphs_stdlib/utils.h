@@ -31,4 +31,21 @@
         exit(EXIT_FAILURE); \
     }
 
+/**
+ * Calculates the modules of a number
+ * mod(−a,b) = b − mod(a,b)
+ * mod(a,b) = a % b
+ *
+ * @param a
+ * @param b
+ * @return The result
+ */
+int mod(int a, int b)
+{
+    if (a < 0)
+        return b - mod((-1 * a), b);
+    else
+        return a % b;
+}
+
 #endif //ASS4_UTILS_H
