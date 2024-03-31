@@ -40,12 +40,8 @@
  * @param b
  * @return The result
  */
-int mod(int a, int b)
-{
-    if (a < 0)
-        return b - mod((-1 * a), b);
-    else
-        return a % b;
-}
+#define STDLIB_MOD(a__, b__) \
+    (((a__) < 0)   ?   ((b__) - (((-1 * (a__)) % (b__)))) \
+                    :   ((a__) % (b__)))
 
 #endif //ASS4_UTILS_H
